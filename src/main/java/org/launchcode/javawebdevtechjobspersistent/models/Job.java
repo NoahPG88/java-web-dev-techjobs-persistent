@@ -2,6 +2,7 @@ package org.launchcode.javawebdevtechjobspersistent.models;
 
 import javax.persistence.*;
 
+//should this class extend AbstractEntity and delete ID & name fields?
 @Entity
 public class Job{
 
