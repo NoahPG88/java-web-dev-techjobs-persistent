@@ -12,6 +12,7 @@ public class Job{
 
     private String name;
 
+    //Refactor to use employer and skills classes with their relationships.  Also, may need to cascade so that post form submission works properly.
     private String employer;
     private String skills;
 
