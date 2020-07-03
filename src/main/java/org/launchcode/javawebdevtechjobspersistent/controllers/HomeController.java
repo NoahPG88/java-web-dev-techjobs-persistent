@@ -1,7 +1,6 @@
 package org.launchcode.javawebdevtechjobspersistent.controllers;
 
 import org.launchcode.javawebdevtechjobspersistent.models.Job;
-import org.launchcode.javawebdevtechjobspersistent.models.Skill;
 import org.launchcode.javawebdevtechjobspersistent.models.data.EmployerRepository;
 import org.launchcode.javawebdevtechjobspersistent.models.data.SkillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,14 +36,14 @@ public class HomeController {
         model.addAttribute("title", "Add Job");
         model.addAttribute(new Job());
         model.addAttribute("employers", employerRepository.findAll());
+        model.addAttribute("skills", skillRepository.findAll());
         return "add";
     }
 
 
-    // need to go in method @RequestParam List<Integer> skills
     @PostMapping("add")
-    public String processAddJobForm(@ModelAttribute @Valid Job newJob,
-                                       Errors errors, Model model, @RequestParam int employerId, @RequestParam Skill skill) {
+    public String processAddJobForm(@ModelAttribute @Valid Job newJob, @RequestParam int employerId, @RequestParam  skills,
+                                       Errors errors, Model model) {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Job");
@@ -52,7 +51,7 @@ public class HomeController {
         }
 
         employerRepository.findById(employerId);
-        skillRepository.save(skill);
+        //skillRepository.save(skill);
         return "redirect:";
     }
 

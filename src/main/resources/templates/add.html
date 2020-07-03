@@ -25,10 +25,19 @@
         <a th:href="@{'/employers/add'}">Add Employers</a>
     </div>
 
+
     <div class="form-group">
-        <label>Skills</label>
-        <input class="form-control" th:field="${skill.name}" />
-        <span th:errors="${skill.name}" class="error"></span>
+        <label th:for="skills">Skills</label>
+        <th:block th:each="skill : ${skills}">
+            <input type="checkbox" name="skills" th:value="${skill.id}">
+            <label th:text="${skill.name}"></label>
+        </th:block>
+        <a th:href="@{'/skills/add'}">Add Skills</a>
+    </div>
+<!--    <div class="form-group">-->
+<!--        <label>Skills</label>-->
+<!--        <input class="form-control" th:field="${skill.name}" />-->
+<!--        <span th:errors="${skill.name}" class="error"></span>-->
 <!--        <select name="skillId">-->
 
 <!--        </select>-->
@@ -36,8 +45,8 @@
 <!--            <input type="text" name="skills" th:value="${skill.id}">-->
 <!--            <label th:text="${skill.name}"></label>-->
 <!--        </th:block>-->
-        <a th:href="@{'/skills/add'}">Add Skills</a>
-    </div>
+<!--        <a th:href="@{'/skills/add'}">Add Skills</a>-->
+<!--    </div>-->
 
     <input type="submit" value="Add Job" />
 </form>
