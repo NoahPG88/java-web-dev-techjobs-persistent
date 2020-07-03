@@ -38,7 +38,7 @@ public class SkillController {
             return "skills/add";
         }
         skillRepository.save(newSkill);
-        return "redirect:";
+        return "redirect:../add";
     }
 
     //GetMapping to view add skills page?
