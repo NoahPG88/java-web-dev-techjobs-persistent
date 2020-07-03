@@ -1,7 +1,9 @@
 package org.launchcode.javawebdevtechjobspersistent.controllers;
 
 import org.launchcode.javawebdevtechjobspersistent.models.Job;
+import org.launchcode.javawebdevtechjobspersistent.models.Skill;
 import org.launchcode.javawebdevtechjobspersistent.models.data.EmployerRepository;
+import org.launchcode.javawebdevtechjobspersistent.models.data.JobRepository;
 import org.launchcode.javawebdevtechjobspersistent.models.data.SkillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +12,8 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by LaunchCode
@@ -22,6 +26,9 @@ public class HomeController {
 
     @Autowired
     private SkillRepository skillRepository;
+
+    @Autowired
+    private JobRepository jobRepository;
 
     @RequestMapping("")
     public String index(Model model) {
@@ -42,7 +49,7 @@ public class HomeController {
 
 
     @PostMapping("add")
-    public String processAddJobForm(@ModelAttribute @Valid Job newJob, @RequestParam int employerId, @RequestParam  skills,
+    public String processAddJobForm(@ModelAttribute @Valid Job newJob, @RequestParam int employerId, @RequestParam List<Integer> skills,
                                        Errors errors, Model model) {
 
         if (errors.hasErrors()) {
@@ -50,8 +57,11 @@ public class HomeController {
             return "add";
         }
 
-        employerRepository.findById(employerId);
-        //skillRepository.save(skill);
+        Optional employer = employerRepository.findById(employerId);
+        Iterable<Skill> skill = skillRepository.findAllById(skills);
+//        skillRepository.save(skill);
+
+        //jobRepository.save(newJob(employer, skill.getName()))
         return "redirect:";
     }
 
