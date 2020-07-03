@@ -22,20 +22,20 @@ public class SkillController {
 
     //do we need display methods?
     @GetMapping("add")
-    public String displayAddEmployerForm(Model model) {
+    public String displayAddSkillForm(Model model) {
         model.addAttribute(new Skill());
-        return "employers/add";
+        return "skills/add";
     }
 
     //postmapping so that skills can be displayed in checkboxes - no location for the add link to go to yet.  Should it be here or in EmployerController?
 
 
     @PostMapping("add")
-    public String processAddEmployerForm(@ModelAttribute @Valid Skill newSkill,
+    public String processAddSkillForm(@ModelAttribute @Valid Skill newSkill,
                                          Errors errors, Model model) {
 
         if (errors.hasErrors()) {
-            return "employers/add";
+            return "skills/add";
         }
         skillRepository.save(newSkill);
         return "redirect:";
