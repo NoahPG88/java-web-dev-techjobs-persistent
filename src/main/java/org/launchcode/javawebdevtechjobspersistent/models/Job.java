@@ -2,44 +2,29 @@ package org.launchcode.javawebdevtechjobspersistent.models;
 
 import javax.persistence.*;
 
-//should this class extend AbstractEntity and delete ID & name fields?
 @Entity
-public class Job{
+public class Job extends AbstractEntity {
 
-    @Id
-    @GeneratedValue
-    private int id;
+    //Need to cascade so that post form submission works properly?
+    @ManyToOne
+    private Employer employer;
 
-    private String name;
-
-    //Refactor to use employer and skills classes with their relationships.  Also, may need to cascade so that post form submission works properly.
-    private String employer;
     private String skills;
 
     public Job() {
     }
 
-    public Job(String anEmployer, String someSkills) {
+    public Job(Employer anEmployer, String someSkills) {
         super();
         this.employer = anEmployer;
         this.skills = someSkills;
     }
 
-    // Getters and setters.
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmployer() {
+    public Employer getEmployer() {
         return employer;
     }
 
-    public void setEmployer(String employer) {
+    public void setEmployer(Employer employer) {
         this.employer = employer;
     }
 
