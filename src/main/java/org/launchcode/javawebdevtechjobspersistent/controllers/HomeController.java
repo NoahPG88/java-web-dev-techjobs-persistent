@@ -1,5 +1,6 @@
 package org.launchcode.javawebdevtechjobspersistent.controllers;
 
+import org.launchcode.javawebdevtechjobspersistent.models.Employer;
 import org.launchcode.javawebdevtechjobspersistent.models.Job;
 import org.launchcode.javawebdevtechjobspersistent.models.Skill;
 import org.launchcode.javawebdevtechjobspersistent.models.data.EmployerRepository;
@@ -41,9 +42,10 @@ public class HomeController {
     public String displayAddJobForm(Model model) {
         model.addAttribute("title", "Add Job");
         model.addAttribute(new Job());
-        //model.addAttribute(new Employer());
         model.addAttribute("employers", employerRepository.findAll());
+        model.addAttribute(new Employer());
         model.addAttribute("skills", skillRepository.findAll());
+        model.addAttribute(new Skill());
         return "add";
     }
 

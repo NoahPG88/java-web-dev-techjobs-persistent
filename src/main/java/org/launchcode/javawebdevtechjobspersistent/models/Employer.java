@@ -20,11 +20,12 @@ public class Employer extends AbstractEntity {
     @JoinColumn
     private List<Job> jobs = new ArrayList<>();
 
+    public Employer(){}
+
     public Employer(@Valid String location) {
+        super();
         this.location = location;
     }
-
-    public Employer(){}
 
     public String getLocation() {
         return location;
