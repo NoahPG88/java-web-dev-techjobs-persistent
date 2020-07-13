@@ -6,12 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("skills")
@@ -27,9 +25,6 @@ public class SkillController {
         return "skills/add";
     }
 
-    //postmapping so that skills can be displayed in checkboxes - no location for the add link to go to yet.  Should it be here or in EmployerController?
-
-
     @PostMapping("add")
     public String processAddSkillForm(@ModelAttribute @Valid Skill newSkill,
                                          Errors errors, Model model) {
@@ -41,5 +36,15 @@ public class SkillController {
         return "redirect:../add";
     }
 
-    //GetMapping to view add skills page?
+    @GetMapping("view/{skillId}")
+    public String displayViewSkill(Model model, @PathVariable int skillId) {
+         Optional optSkill = skillRepository.findById(skillId);
+        if (optSkill.isPresent()){
+            Skill skill = (Skill) optSkill.get();
+            model.addAttribute("skill", skill);
+            return "skills/view";
+        } else {
+            return "redirect:../";
+        }
+    }
 }
