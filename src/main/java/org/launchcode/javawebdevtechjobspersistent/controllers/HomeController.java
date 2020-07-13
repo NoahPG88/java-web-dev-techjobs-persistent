@@ -43,9 +43,9 @@ public class HomeController {
         model.addAttribute("title", "Add Job");
         model.addAttribute(new Job());
         model.addAttribute("employers", employerRepository.findAll());
-        model.addAttribute(new Employer());
+        //model.addAttribute(new Employer());
         model.addAttribute("skills", skillRepository.findAll());
-        model.addAttribute(new Skill());
+        //model.addAttribute(new Skill());
         return "add";
     }
 
@@ -59,7 +59,12 @@ public class HomeController {
             return "add";
         }
 
-        Optional employer = employerRepository.findById(employerId);
+        Optional optEmployer = employerRepository.findById(employerId);
+        if (optEmployer.isPresent()){
+            Employer employer = (Employer) optEmployer.get();
+            newJob.setEmployer(employer);
+        }
+
         List<Skill> skillObjs = (List<Skill>) skillRepository.findAllById(skills);
         newJob.setSkills(skillObjs);
         jobRepository.save(newJob);
@@ -68,9 +73,13 @@ public class HomeController {
 
     @GetMapping("view/{jobId}")
     public String displayViewJob(Model model, @PathVariable int jobId) {
-
+        Optional optJob = jobRepository.findById(jobId);
+        if (optJob.isPresent()){
+            Job job = (Job) optJob.get();
+            model.addAttribute("job", job);
+            return "view";
+        }
         return "view";
     }
-
 
 }

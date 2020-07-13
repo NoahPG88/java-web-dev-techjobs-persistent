@@ -22,9 +22,10 @@ public class Employer extends AbstractEntity {
 
     public Employer(){}
 
-    public Employer(@Valid String location) {
+    public Employer(@Valid String location, List<Job> jobs) {
         super();
         this.location = location;
+        this.jobs = jobs;
     }
 
     public String getLocation() {
@@ -33,5 +34,13 @@ public class Employer extends AbstractEntity {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public List<Job> getJobs() {
+        return jobs;
+    }
+
+    public void setJobs(List<Job> jobs) {
+        this.jobs = jobs;
     }
 }
