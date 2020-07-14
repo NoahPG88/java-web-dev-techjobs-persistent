@@ -51,7 +51,7 @@ public class HomeController {
 
 
     @PostMapping("add")
-    public String processAddJobForm(@ModelAttribute @Valid Job newJob, @RequestParam int employerId, @RequestParam List<Integer> skills,
+    public String processAddJobForm(@ModelAttribute @Valid Job newJob,@RequestParam int employerId, @RequestParam List<Integer> skills,
                                        Errors errors, Model model) {
 
         if (errors.hasErrors()) {

@@ -20,7 +20,7 @@ public class Skill extends AbstractEntity {
 
     public Skill(){}
 
-    public Skill(@Valid String description, @Valid List<Job> jobs) {
+    public Skill(@Valid String description, List<Job> jobs) {
         super();
         this.description = description;
         this.jobs = jobs;
