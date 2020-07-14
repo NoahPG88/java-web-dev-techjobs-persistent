@@ -18,7 +18,6 @@ public class SkillController {
     @Autowired
     private SkillRepository skillRepository;
 
-    //do we need display methods?
     @GetMapping("add")
     public String displayAddSkillForm(Model model) {
         model.addAttribute(new Skill());

@@ -9,7 +9,6 @@ import java.util.List;
 @Entity
 public class Job extends AbstractEntity {
 
-    //Need to cascade so that post form submission works properly?
     @ManyToOne
     private Employer employer;
 
